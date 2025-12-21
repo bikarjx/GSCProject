@@ -25,18 +25,22 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "GSCP|Input")
 	TArray<TObjectPtr<UInputMappingContext>> InputMappingContexts;
 	
-	UPROPERTY(EditDefaultsOnly, Category = "GSCP|Input")
+	UPROPERTY(EditDefaultsOnly, Category = "GSCP|Input|Movement")
 	TObjectPtr<UInputAction> JumpAction;
 	
-	UPROPERTY(EditDefaultsOnly, Category = "GSCP|Input")
+	UPROPERTY(EditDefaultsOnly, Category = "GSCP|Input|Movement")
 	TObjectPtr<UInputAction> MoveAction;
 	
-	UPROPERTY(EditDefaultsOnly, Category = "GSCP|Input")
+	UPROPERTY(EditDefaultsOnly, Category = "GSCP|Input|Movement")
 	TObjectPtr<UInputAction> LookAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "GSCP|Input|Ability")
+	TObjectPtr<UInputAction> PrimaryAction;
 	
 	void Jump();
 	void StopJumping();
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
+	void Primary();
 	
 };

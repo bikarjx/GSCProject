@@ -3,15 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystemInterface.h"
 #include "GameFramework/Character.h"
 #include "GC_BaseCharacter.generated.h"
 
 UCLASS(Abstract)
-class GSCPROJECT_API AGC_BaseCharacter : public ACharacter
+class GSCPROJECT_API AGC_BaseCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
 public:
 	AGC_BaseCharacter();
-	
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 };
