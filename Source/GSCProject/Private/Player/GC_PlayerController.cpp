@@ -2,10 +2,14 @@
 
 
 #include "GSCProject/Public/Player/GC_PlayerController.h"
+
+#include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystemComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputMappingContext.h"
 #include "GameFramework/Character.h"
+#include "GameplayTags/GCTags.h"
 
 void AGC_PlayerController::SetupInputComponent()
 {
@@ -68,5 +72,13 @@ void AGC_PlayerController::Look(const FInputActionValue& Value)
 
 void AGC_PlayerController::Primary()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Primary"));
+	ActivateAbility(GCTags::GCAbilities::Primary);
+}
+
+void AGC_PlayerController::ActivateAbility(const FGameplayTag& AbilityTag) const
+{
+	UAbilitySystemComponent* ASC =UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn());
+	if (!IsValid(ASC)) return;
+	
+	ASC->TryActivateAbilitiesByTag(AbilityTag.GetSingleTagContainer());
 }

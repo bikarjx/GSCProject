@@ -7,6 +7,8 @@
 #include "GameFramework/Character.h"
 #include "GC_BaseCharacter.generated.h"
 
+class UGameplayAbility;
+
 UCLASS(Abstract)
 class GSCPROJECT_API AGC_BaseCharacter : public ACharacter, public IAbilitySystemInterface
 {
@@ -15,4 +17,15 @@ class GSCPROJECT_API AGC_BaseCharacter : public ACharacter, public IAbilitySyste
 public:
 	AGC_BaseCharacter();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	
+	
+protected:
+	
+	void GiveStartupAbilities();
+	
+private:
+	
+	UPROPERTY(EditDefaultsOnly, Category = "GSCP|Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+	
 };
