@@ -38,11 +38,20 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "GSCP|Input|Ability")
 	TObjectPtr<UInputAction> PrimaryAction;
 	
+	UPROPERTY(EditDefaultsOnly, Category = "GSCP|Input|Ability")
+	TObjectPtr<UInputAction> SecondaryAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "GSCP|Input|Ability")
+	TObjectPtr<UInputAction> TertiaryAction;
+	
 	void Jump();
 	void StopJumping();
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 	void Primary();
+	void Secondary();
+	void Tertiary();
+	
 	void ActivateAbility(const FGameplayTag& AbilityTag) const;
 	
 };
