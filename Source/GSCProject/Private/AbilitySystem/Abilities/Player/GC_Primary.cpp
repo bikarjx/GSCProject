@@ -2,9 +2,12 @@
 
 
 #include "AbilitySystem/Abilities/Player/GC_Primary.h"
-#include "Engine/OverlapResult.h"
 
-void UGC_Primary::HitBoxOverlapTest()
+#include "AbilitySystemBlueprintLibrary.h"
+#include "Engine/OverlapResult.h"
+#include "GameplayTags/GCTags.h"
+
+TArray<AActor*> UGC_Primary::HitBoxOverlapTest()
 {
 	TArray<AActor*> ActorsToIgnore;
 	ActorsToIgnore.Add(GetAvatarActorFromActorInfo());
@@ -25,18 +28,41 @@ void UGC_Primary::HitBoxOverlapTest()
 	
 	GetWorld()->OverlapMultiByChannel(OverlapResults, HitBoxLocation, FQuat::Identity, ECC_Visibility, Sphere, QueryParams, ResponseParams);
 	
+	TArray<AActor*> ActorHit;
+	for (const FOverlapResult& Result : OverlapResults)
+	{
+		if (!IsValid(Result.GetActor())) continue;
+		ActorHit.AddUnique(Result.GetActor());
+	}
+	
 	if (bDrawDebugs)
 	{
-		DrawDebugSphere(GetWorld(), HitBoxLocation, HitBoxRadius, 16, FColor::Red, false, 3.f);
+		DrawHitboxOverlapDebugs(OverlapResults, HitBoxLocation);
+	}
+	return ActorHit;
+}
+
+void UGC_Primary::SendHitReactEventToActors(const TArray<AActor*>& ActorsHit)
+{
+	for (AActor* HitActor : ActorsHit)
+	{
+		FGameplayEventData Payload;
+		Payload.Instigator = GetAvatarActorFromActorInfo();
+		UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(HitActor, GCTags::Events::Enemy::HitReact, Payload);
+	}
+}
+
+void UGC_Primary::DrawHitboxOverlapDebugs(const TArray<FOverlapResult>& OverlapResults,const FVector& HitBoxLocation) const
+{
+	DrawDebugSphere(GetWorld(), HitBoxLocation, HitBoxRadius, 16, FColor::Red, false, 3.f);
 		
-		for (const FOverlapResult& Result : OverlapResults)
+	for (const FOverlapResult& Result : OverlapResults)
+	{
+		if (IsValid(Result.GetActor()))
 		{
-			if (IsValid(Result.GetActor()))
-			{
-				FVector DebugLocation = Result.GetActor()->GetActorLocation();
-				DebugLocation.Z += 100.f;
-				DrawDebugSphere(GetWorld(), DebugLocation, 30.f, 10, FColor::Green, false, 3.f);
-			}
+			FVector DebugLocation = Result.GetActor()->GetActorLocation();
+			DebugLocation.Z += 100.f;
+			DrawDebugSphere(GetWorld(), DebugLocation, 30.f, 10, FColor::Green, false, 3.f);
 		}
 	}
 }

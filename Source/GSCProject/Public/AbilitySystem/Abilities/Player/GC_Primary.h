@@ -17,9 +17,14 @@ class GSCPROJECT_API UGC_Primary : public UGC_GameplayAbility
 public:
 	
 	UFUNCTION( BlueprintCallable, Category="GSCP|Abilities")
-	void HitBoxOverlapTest();
+	TArray<AActor*> HitBoxOverlapTest();
+	
+	UFUNCTION( BlueprintCallable, Category="GSCP|Abilities")
+	void SendHitReactEventToActors(const TArray<AActor*>& ActorsHit);
 	
 private:
+	
+	void DrawHitboxOverlapDebugs(const TArray<FOverlapResult>& OverlapResults, const FVector& HitBoxLocation) const;
 	
 	UPROPERTY( EditDefaultsOnly, Category = "GSCP|Abilities")
 	float HitBoxRadius = 100.0f;
