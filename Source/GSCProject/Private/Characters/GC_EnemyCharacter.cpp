@@ -2,8 +2,7 @@
 
 
 #include "Characters/GC_EnemyCharacter.h"
-
-#include "AbilitySystemComponent.h"
+#include "AbilitySystem/GC_AbilitySystemComponent.h"
 
 
 // Sets default values
@@ -12,14 +11,14 @@ AGC_EnemyCharacter::AGC_EnemyCharacter()
 
 	PrimaryActorTick.bCanEverTick = false;
 	
-	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent = CreateDefaultSubobject<UGC_AbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 }
 
 UAbilitySystemComponent* AGC_EnemyCharacter::GetAbilitySystemComponent() const
 {
-	return Super::GetAbilitySystemComponent();
+	return AbilitySystemComponent;
 }
 
 
