@@ -15,6 +15,9 @@ class GSCPROJECT_API UGC_GameplayAbility : public UGameplayAbility
 	GENERATED_BODY()
 	
 public:
+	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle,
+		const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, 
+		const FGameplayEventData* TriggerEventData) override;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "GSCP|Debug")
 	bool bDrawDebugs = false;
