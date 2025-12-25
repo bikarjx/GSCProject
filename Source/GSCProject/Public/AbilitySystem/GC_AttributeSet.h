@@ -1,0 +1,62 @@
+﻿// Copyright Bika Ridjalluddin
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "AbilitySystemComponent.h"
+#include "AttributeSet.h"
+#include "GC_AttributeSet.generated.h"
+
+#define ATTRIBUTE_ACCESSORS(Classname, PropertyName) \
+	GAMEPLAYATTRIBUTE_PROPERTY_GETTER(Classname, PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
+
+/**
+ * 
+ */
+UCLASS()
+class GSCPROJECT_API UGC_AttributeSet : public UAttributeSet
+{
+	GENERATED_BODY()
+	
+public:
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health)
+	FGameplayAttributeData Health;
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxHealth)
+	FGameplayAttributeData MaxHealth;
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Mana)
+	FGameplayAttributeData Mana;
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxMana)
+	FGameplayAttributeData MaxMana;
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Stamina)
+	FGameplayAttributeData Stamina;
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxStamina)
+	FGameplayAttributeData MaxStamina;
+	
+	
+	UFUNCTION()
+	void OnRep_Health(const FGameplayAttributeData& OldValue);
+	UFUNCTION()
+	void OnRep_MaxHealth(const FGameplayAttributeData& OldValue);
+	UFUNCTION()
+	void OnRep_Mana(const FGameplayAttributeData& OldValue);
+	UFUNCTION()
+	void OnRep_MaxMana(const FGameplayAttributeData& OldValue);
+	UFUNCTION()
+	void OnRep_Stamina(const FGameplayAttributeData& OldValue);
+	UFUNCTION()
+	void OnRep_MaxStamina(const FGameplayAttributeData& OldValue);
+	
+	ATTRIBUTE_ACCESSORS(ThisClass, Health)
+	ATTRIBUTE_ACCESSORS(ThisClass, MaxHealth)
+	ATTRIBUTE_ACCESSORS(ThisClass, Mana)
+	ATTRIBUTE_ACCESSORS(ThisClass, MaxMana)
+	ATTRIBUTE_ACCESSORS(ThisClass, Stamina)
+	ATTRIBUTE_ACCESSORS(ThisClass, MaxStamina)
+
+	
+};

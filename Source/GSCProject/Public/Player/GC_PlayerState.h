@@ -7,6 +7,7 @@
 #include "GameFramework/PlayerState.h"
 #include "GC_PlayerState.generated.h"
 
+class UAttributeSet;
 class UAbilitySystemComponent;
 /**
  * 
@@ -25,4 +26,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category="GSCP|Ability")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+	
+	UPROPERTY( EditDefaultsOnly, Category = "GSCP|Attributes")
+	TObjectPtr<UAttributeSet> AttributeSet;
 };

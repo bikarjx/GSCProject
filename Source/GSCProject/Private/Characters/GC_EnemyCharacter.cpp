@@ -3,6 +3,7 @@
 
 #include "Characters/GC_EnemyCharacter.h"
 #include "AbilitySystem/GC_AbilitySystemComponent.h"
+#include "AbilitySystem/GC_AttributeSet.h"
 
 
 // Sets default values
@@ -14,6 +15,8 @@ AGC_EnemyCharacter::AGC_EnemyCharacter()
 	AbilitySystemComponent = CreateDefaultSubobject<UGC_AbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+	
+	AttributeSet = CreateDefaultSubobject<UGC_AttributeSet>("AttributeSet");
 }
 
 UAbilitySystemComponent* AGC_EnemyCharacter::GetAbilitySystemComponent() const

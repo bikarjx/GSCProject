@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GC_BaseCharacter.h"
 #include "GC_EnemyCharacter.generated.h"
+class UAttributeSet;
 class UAbilitySystemComponent;
 
 UCLASS()
@@ -25,4 +26,7 @@ private:
 	
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+	
+	UPROPERTY( EditDefaultsOnly, Category = "GSCP|Attributes")
+	TObjectPtr<UAttributeSet> AttributeSet;
 };
