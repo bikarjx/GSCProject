@@ -1,4 +1,4 @@
-﻿// Copyright Bika Ridjalluddin
+﻿// Copyright Bika Ridjalluddin. All Rights Reserved.
 
 #pragma once
 
@@ -17,6 +17,7 @@ public:
 
 	AGC_EnemyCharacter();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	virtual UAttributeSet* GetAttributeSet() const override;
 
 protected:
 

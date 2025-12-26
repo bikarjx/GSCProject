@@ -1,4 +1,4 @@
-﻿// Copyright Bika Ridjalluddin
+﻿// Copyright Bika Ridjalluddin. All Rights Reserved.
 
 #pragma once
 
@@ -21,6 +21,7 @@ public:
 	
 	AGC_PlayerState();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	UAttributeSet* GetAttributeSet() const {return AttributeSet;}
 	
 private:
 

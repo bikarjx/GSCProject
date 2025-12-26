@@ -1,4 +1,4 @@
-﻿// Copyright Bika Ridjalluddin
+﻿// Copyright Bika Ridjalluddin. All Rights Reserved.
 
 #pragma once
 

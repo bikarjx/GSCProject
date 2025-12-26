@@ -1,4 +1,4 @@
-﻿// Copyright Bika Ridjalluddin
+﻿// Copyright Bika Ridjalluddin. All Rights Reserved.
 
 
 #include "Player/GC_PlayerState.h"

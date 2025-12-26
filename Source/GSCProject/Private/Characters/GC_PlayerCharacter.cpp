@@ -1,4 +1,4 @@
-﻿// Copyright Bika Ridjalluddin
+﻿// Copyright Bika Ridjalluddin. All Rights Reserved.
 
 
 #include "GSCProject/Public/Characters/GC_PlayerCharacter.h"
@@ -47,6 +47,14 @@ UAbilitySystemComponent* AGC_PlayerCharacter::GetAbilitySystemComponent() const
 	return GCPlayerState->GetAbilitySystemComponent();
 }
 
+UAttributeSet* AGC_PlayerCharacter::GetAttributeSet() const
+{
+	AGC_PlayerState* GCPlayerState = Cast<AGC_PlayerState>(GetPlayerState());
+	if (!IsValid(GCPlayerState)) return nullptr;
+	
+	return GCPlayerState->GetAttributeSet();
+}
+
 void AGC_PlayerCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
@@ -54,6 +62,7 @@ void AGC_PlayerCharacter::PossessedBy(AController* NewController)
 	if (!IsValid(GetAbilitySystemComponent()) || !HasAuthority()) return;
 	
 	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(), this);
+	OnASCInitialized.Broadcast(GetAbilitySystemComponent(), GetAttributeSet());
 	GiveStartupAbilities();
 	InitializeAttributes();
 }
@@ -65,5 +74,7 @@ void AGC_PlayerCharacter::OnRep_PlayerState()
 	if (!IsValid(GetAbilitySystemComponent())) return;
 	
 	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(), this);
+	OnASCInitialized.Broadcast(GetAbilitySystemComponent(), GetAttributeSet());
+
 }
 

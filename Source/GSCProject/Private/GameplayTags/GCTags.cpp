@@ -1,4 +1,6 @@
-﻿#include "GameplayTags/GCTags.h"
+﻿// Copyright Bika Ridjalluddin. All Rights Reserved.
+
+#include "GameplayTags/GCTags.h"
 
 namespace GCTags
 {
