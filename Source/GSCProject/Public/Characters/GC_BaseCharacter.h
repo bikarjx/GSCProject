@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "GC_BaseCharacter.generated.h"
 
+class UGameplayEffect;
 class UGameplayAbility;
 
 UCLASS(Abstract)
@@ -22,10 +23,13 @@ public:
 protected:
 	
 	void GiveStartupAbilities();
+	void InitializeAttributes() const;
 	
 private:
 	
 	UPROPERTY(EditDefaultsOnly, Category = "GSCP|Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 	
+	UPROPERTY(EditDefaultsOnly, Category = "GSCP|Effects")
+	TSubclassOf<UGameplayEffect> InitializeAttributeEffect;
 };
