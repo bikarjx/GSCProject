@@ -30,7 +30,7 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "GSCP|Attributes")
 	FAttributesInitialized OnAttributesInitialized;
 	
-	UPROPERTY(ReplicatedUsing=OnRep_AttributeInitialized , Category = "GSCP|Attributes")
+	UPROPERTY(ReplicatedUsing=OnRep_AttributeInitialized)
 	bool bAttributesInitialized = false;
 	
 	UFUNCTION()

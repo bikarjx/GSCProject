@@ -24,9 +24,9 @@ public:
 	
 private:
 	
-	UPROPERTY(VisibleAnywhere, Category="Camera")
+	UPROPERTY(VisibleAnywhere, Category="GSCP|Camera")
 	TObjectPtr<USpringArmComponent> CameraBoom;
 	
-	UPROPERTY(VisibleAnywhere, Category="Camera")
+	UPROPERTY(VisibleAnywhere, Category="GSCP|Camera")
 	TObjectPtr<UCameraComponent> FollowCamera;
 };

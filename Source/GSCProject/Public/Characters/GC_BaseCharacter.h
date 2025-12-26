@@ -24,7 +24,7 @@ public:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	virtual UAttributeSet* GetAttributeSet() const {return nullptr;}
 	
-	UPROPERTY(BlueprintAssignable, Category="GSCP")
+	UPROPERTY(BlueprintAssignable, Category="GSCP|Abilities")
 	FASCInitialized OnASCInitialized;
 	
 protected:
