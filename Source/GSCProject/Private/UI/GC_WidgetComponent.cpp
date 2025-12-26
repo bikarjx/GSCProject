@@ -17,7 +17,9 @@ void UGC_WidgetComponent::BeginPlay()
 	if (!IsASCInitialized())
 	{
 		GSCPCharacter->OnASCInitialized.AddDynamic(this, &ThisClass::OnASCInitialized);
+		return;
 	}
+	InitializeAttributeDelegate();
 }
 
 void UGC_WidgetComponent::InitAbilitySystemData()
@@ -32,10 +34,31 @@ bool UGC_WidgetComponent::IsASCInitialized() const
 	return AbilitySystemComponent.IsValid() && AttributeSet.IsValid();
 }
 
+void UGC_WidgetComponent::InitializeAttributeDelegate()
+{
+	if (!AttributeSet->bAttributesInitialized)
+	{
+		AttributeSet->OnAttributesInitialized.AddDynamic(this, &ThisClass::BindToAttributeChanges);
+	}
+	else
+	{
+		BindToAttributeChanges();
+	}
+}
+
 void UGC_WidgetComponent::OnASCInitialized(UAbilitySystemComponent* ASC, UAttributeSet* AS)
 {
 	AbilitySystemComponent = Cast<UGC_AbilitySystemComponent>(ASC);
 	AttributeSet = Cast<UGC_AttributeSet>(AS);
+	
+	if (!IsASCInitialized()) return;
+	
+	InitializeAttributeDelegate();
+}
+
+void UGC_WidgetComponent::BindToAttributeChanges()
+{
+	
 }
 
 

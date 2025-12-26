@@ -15,8 +15,28 @@ void UGC_AttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME_CONDITION_NOTIFY(ThisClass, MaxMana, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(ThisClass, Stamina, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(ThisClass, MaxStamina, COND_None, REPNOTIFY_Always);
+	
+	DOREPLIFETIME(ThisClass, bAttributesInitialized);
 }
 
+void UGC_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
+{
+	Super::PostGameplayEffectExecute(Data);
+	
+	if (!bAttributesInitialized)
+	{
+		bAttributesInitialized = true;
+		OnAttributesInitialized.Broadcast();
+	}
+}
+
+void UGC_AttributeSet::OnRep_AttributeInitialized()
+{
+	if (bAttributesInitialized)
+	{
+		OnAttributesInitialized.Broadcast();
+	}
+}
 
 
 void UGC_AttributeSet::OnRep_Health(const FGameplayAttributeData& OldValue)
