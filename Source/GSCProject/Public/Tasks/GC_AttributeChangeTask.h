@@ -15,7 +15,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnAttributeChanged, FGameplayAtt
 /**
  * 
  */
-UCLASS()
+UCLASS(BlueprintType, meta=(ExposedAsyncProxy = AsyncTask))
 class GSCPROJECT_API UGC_AttributeChangeTask : public UBlueprintAsyncActionBase
 {
 	GENERATED_BODY()
@@ -25,7 +25,7 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FOnAttributeChanged OnAttributeChanged;
 	
-	UFUNCTION(Blueprintable, meta=(BlueprintInternalUseOnly = "true"))
+	UFUNCTION(BlueprintCallable, meta=(BlueprintInternalUseOnly = "true"))
 	static UGC_AttributeChangeTask* ListenForAttributeChange(UAbilitySystemComponent* AbilitySystemComponent, FGameplayAttribute Attribute);
 	
 	UFUNCTION(BlueprintCallable)
